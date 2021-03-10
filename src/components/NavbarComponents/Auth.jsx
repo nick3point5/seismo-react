@@ -30,7 +30,7 @@ function SignOut(props) {
 
   return auth.currentUser && (
     <div className="">
-      <button onClick={() => { props.functions.handleLogout() }} className="btn" title="logout"><LogoutIcon /></button>
+      <button onClick={() => { props.functions.handleLogout() }} className="btn nav-item" title="logout"><LogoutIcon /></button>
     </div>
   )
 }
@@ -47,7 +47,7 @@ function SignIn() {
 
   return (
     <Modal
-      trigger={<div className="btn" title="login"><LoginIcon /></div>}
+      trigger={<div className="btn nav-item" title="login"><LoginIcon /></div>}
       actions={<Button modal="close" className="btn">X</Button>}
     >
 

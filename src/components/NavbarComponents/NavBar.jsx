@@ -34,11 +34,11 @@ export function Navbar(props) {
             <ul>
               {props.state.loggedIn ?
                 <>
-                  <li>{<NewForm functions={postFunctions} comment={props.state.comment} />}</li>
-                  <li><Link to={`/user/${auth.currentUser ? auth.currentUser.uid : ''}`} className="btn" title="my account">{<HomeIcon />}</Link></li>
+                  <li className="nav-item">{<NewForm functions={postFunctions} comment={props.state.comment} />}</li>
+                  <li className="nav-item"><Link to={`/user/${auth.currentUser ? auth.currentUser.uid : ''}`} className="btn" title="my account">{<HomeIcon />}</Link></li>
                 </> :
                 ''}
-              <li><Auth user={props.state.user} functions={authFunctions} /></li>
+              <li className="nav-item"><Auth user={props.state.user} functions={authFunctions} /></li>
             </ul>
           </div>
         </nav>
