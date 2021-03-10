@@ -162,7 +162,7 @@ export class HomePage extends Component {
         <Navbar handle={navFunctions} state={this.state}/>
         <div className="home-page content">
           <div className="home-nav-item top-post-nav active center">
-            <p>Top Posts</p>
+            <p>Top Earthquakes</p>
           </div>
           
           <Posts functions={postFunctions} posts={this.state.topPosts} />

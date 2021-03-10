@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 window.addEventListener("load", function () {
 	function rippleEffect() {
 		const body = document.body;

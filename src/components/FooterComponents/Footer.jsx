@@ -5,7 +5,9 @@ function Footer({ content }) {
   return (
       <div className="foot">
         <footer className="center">
-          Kenny Trinh © 2021
+          <a href="http://www.kennytrinh.ga/">
+            Kenny Trinh © 2021            
+          </a>
         </footer>
       </div>
   )
