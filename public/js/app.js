@@ -58,5 +58,4 @@ window.addEventListener("load", function () {
 
 	rippleEffect();
 	bodyShake();
-	logoShake();
 });

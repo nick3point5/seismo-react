@@ -15,7 +15,13 @@ export class HomePage extends Component {
   
   componentDidMount(){
     this.fetchData()
-    
+    const logoEle = document.getElementById("nav-logo");
+		logoEle.addEventListener("mouseover", () => {
+			logoEle.classList.add("shake");
+		});
+		logoEle.addEventListener("mouseout", () => {
+			logoEle.classList.remove("shake");
+		});
   }
 
   fetchData=()=>{

@@ -20,6 +20,13 @@ export class UserPage extends Component {
 
   componentDidMount(){
     this.fetchData.all(this.props.match.params.id)
+    const logoEle = document.getElementById("nav-logo");
+		logoEle.addEventListener("mouseover", () => {
+			logoEle.classList.add("shake");
+		});
+		logoEle.addEventListener("mouseout", () => {
+			logoEle.classList.remove("shake");
+		});
   }
 
   componentDidUpdate() {

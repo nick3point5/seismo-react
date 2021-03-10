@@ -18,6 +18,13 @@ export class Details extends Component {
 
   componentDidMount(){
     this.fetchData(this.props.match.params.id)
+    const logoEle = document.getElementById("nav-logo");
+		logoEle.addEventListener("mouseover", () => {
+			logoEle.classList.add("shake");
+		});
+		logoEle.addEventListener("mouseout", () => {
+			logoEle.classList.remove("shake");
+		});
   }
 
   componentDidUpdate() {
