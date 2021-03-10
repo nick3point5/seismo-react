@@ -31,7 +31,7 @@ export function Navbar(props) {
             </div>
           </Link>
           <div>
-            <ul>
+            <ul className="nav-actions flex-r">
               {props.state.loggedIn ?
                 <>
                   <li className="nav-item">{<NewForm functions={postFunctions} comment={props.state.comment} />}</li>

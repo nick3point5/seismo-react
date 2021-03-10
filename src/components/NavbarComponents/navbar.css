@@ -29,3 +29,19 @@ nav {
 .nav-item {
 	margin: 0 0.5rem;
 }
+
+@media only screen and (max-width: 500px) {
+	nav.base-card{
+		flex-direction: column;
+		height: 10rem;
+		
+	}
+	.nav-actions{
+		width: 100vw;
+		justify-content: space-around;
+	}
+	ul{
+		width: 100vw;
+		justify-content: space-around;
+	}
+}
