@@ -210,6 +210,27 @@ export class UserPage extends Component {
       })
       .catch((err) => console.log(err));
     },
+    userDelete:(user) => {
+      console.log(user.uid)
+      auth.signOut()
+      user.delete().then(function() {
+      }).catch(function(error) {
+      });
+      
+      fetch(`${seismoApiUrl}/user/${user.uid}`, {
+        method: 'DELETE',
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data)
+        this.setState({
+          redirect:true
+        })
+      })
+      .catch((err) => console.log(err));
+    },
     follow:(user)=>{
       const obj={
         id: user.uid
@@ -408,6 +429,7 @@ export class UserPage extends Component {
       fetchFollowers:this.fetchData.followers,
       handleChange:this.handle.change,
       handleUpdate:this.handle.updateProfile,
+      handleUserDelete:this.handle.userDelete,
     }
 
     const profileState={

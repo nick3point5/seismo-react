@@ -34,7 +34,6 @@
 
 .user-action-btn {
 	z-index: 1;
-	/* min-width: 3.5rem; */
 	transform: translate(-1.75rem, 0);
 	position: absolute;
 }

@@ -5,3 +5,12 @@
 label {
 	font-size: 1.5rem;
 }
+
+.modal-footer{
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.user-delete-btn{
+	transform: translate(-2rem);
+}

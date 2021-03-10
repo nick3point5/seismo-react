@@ -14,7 +14,8 @@ function SettingsForm(props) {
     <form>
       <Modal
         trigger={<Button className="btn user-action-btn" title="change profile"><SettingsIcon /></Button>}
-        actions={[<Button modal="close" onClick={() => { props.functions.handleUpdate(user) }}>Update</Button>]}
+        actions={[<Button modal="close" onClick={() => { props.functions.handleUpdate(user) }}>Update</Button>,
+        <Button modal="close" className="btn user-delete-btn delete-btn" onClick={() => { props.functions.handleUserDelete(user) }}>Delete</Button>]}
       >
         <p className="form-title">Change Profile</p>
         <div className="input-field">
