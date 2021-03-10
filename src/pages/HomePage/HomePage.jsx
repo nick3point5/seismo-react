@@ -15,7 +15,6 @@ export class HomePage extends Component {
   
   componentDidMount(){
     this.fetchData()
-    console.log()
     
   }
 
@@ -74,7 +73,6 @@ export class HomePage extends Component {
       const obj = {
         comment: this.state.comment,
       }
-      console.log(obj);
       
       
       fetch(`${seismoApiUrl}/post/${postId}`,{

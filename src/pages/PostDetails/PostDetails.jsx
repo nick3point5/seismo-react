@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Posts from '../../components/PostsComponents/Posts'
-import { withRouter } from "react-router";
+import { withRouter, Redirect } from "react-router";
 import './details.css'
 import seismoApiUrl from "../../config/Api";
 import firebase from 'firebase/app'
@@ -29,6 +29,11 @@ export class Details extends Component {
     }
   }
   fetchData=(post_id)=>{
+    if(post_id.length !== 24){
+      this.setState({
+        redirect:true
+      })
+    }
     fetch(`${seismoApiUrl}/post/${post_id}`,{
       method:'GET'
     })
@@ -36,9 +41,17 @@ export class Details extends Component {
         return res.json()
       })
       .then(data=>{
-        this.setState({
-          post: data
-        })
+        if(data){
+          this.setState({
+            post: data
+          })
+        }else{
+          this.setState({
+            redirect:true
+          })
+        }
+
+
       })
       .catch((err) => console.log(err));
       fetch(`${seismoApiUrl}/post/getposts/${post_id}`,{
@@ -108,7 +121,6 @@ export class Details extends Component {
       const obj = {
         comment: this.state.comment,
       }
-      console.log(obj);
       
       fetch(`${seismoApiUrl}/post/${postId}`,{
           method: 'PUT',
@@ -266,6 +278,7 @@ export class Details extends Component {
             <></>
           }
         </div>
+        {this.state.redirect?<Redirect to="/"/>:''}
       </>
     )
   }

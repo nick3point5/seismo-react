@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Posts from '../../components/PostsComponents/Posts'
 import Profile from '../../components/ProfileComponents/Profile'
-import { withRouter } from "react-router";
+import { withRouter, Redirect } from "react-router";
 import seismoApiUrl from "../../config/Api";
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -13,6 +13,9 @@ export class UserPage extends Component {
   state={
     id:this.props.match.params.id,
     photo:'',
+    profile: '',
+    displayName: '',
+    about:''
   }
 
   componentDidMount(){
@@ -21,7 +24,6 @@ export class UserPage extends Component {
 
   componentDidUpdate() {
     if (this.props.match.params.id !== this.state.id) {
-      console.log('chafe')
       
       this.fetchData.all(this.props.match.params.id)
       this.setState({
@@ -39,11 +41,17 @@ export class UserPage extends Component {
           return res.json()
         })
         .then(data=>{
-          this.setState({
-            profile: data,
-            displayName: data.username,
-            about:data.about
-          })
+          if(data){
+            this.setState({
+              profile: data,
+              displayName: data.username,
+              about:data.about
+            })
+          }else{
+            this.setState({
+              redirect:true
+            })
+          }
         })
     },
     followers:(user_id)=>{
@@ -125,7 +133,6 @@ export class UserPage extends Component {
     change:(event)=>{
       event.preventDefault();
       if (event.target.files&&event.target.files[0]) {
-        console.log(event.target.files[0])
         this.setState({  
           photo:event.target.files[0]
         });
@@ -167,13 +174,11 @@ export class UserPage extends Component {
         .catch((err) => console.log(err));
     },
     update:(event,postId='')=>{
-      console.log(event)
       
       event.preventDefault()
       const obj = {
         comment: this.state.comment,
       }
-      console.log(obj);
       
       fetch(`${seismoApiUrl}/post/${postId}`,{
           method: 'PUT',
@@ -322,7 +327,7 @@ export class UserPage extends Component {
                 .catch((err) => console.log(err));
   
             })
-            .catch(err=>console.log(err))
+            .catch((err)=>console.log(err))
         })
         
       }else{
@@ -465,6 +470,7 @@ export class UserPage extends Component {
             <></>
           }
         </div>
+        {this.state.redirect?<Redirect to="/"/>:''}
       </>
       
     )

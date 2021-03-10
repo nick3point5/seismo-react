@@ -7,9 +7,9 @@ import UserPage from '../pages/UserPage/UserPage';
 
 const routes = (
   <Switch>
-      <Route exact path='/' component={HomePage}/>
-      <Route path='/post/:id' component={PostDetails}/>
-      <Route path='/user/:id' component={UserPage}/>
+    <Route path='/post/:id' component={PostDetails} />
+    <Route path='/user/:id' component={UserPage} />
+    <Route path='/' component={HomePage} />
   </Switch>
 )
 

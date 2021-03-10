@@ -9,6 +9,6 @@ if (!firebase.apps.length) {
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_FIREBASE_APP_ID
   })
-}else {
+} else {
   firebase.app();
 }

@@ -1,116 +1,151 @@
-:root{
-  --color1: #ffd700;
-  --color2: #E71D36;
-  --color3: #7699D4;
-  --color4: #1f005d;
-  --color4trans: #1f005dc4;
-  --color5: #0F002E;
-  --color6: #6DAEDB;
-  --color6trans: #6DAEDBc4;
-  --color7: #000;
-  --color8: #dd6170;
-  --color9: #ff4646;
-  --color10: #4a74bd;
-  --color11: #181977;
-  font-size: 16px;
+:root {
+	--color1: #ffd700;
+	--color2: #e71d36;
+	--color3: #7699d4;
+	--color4: #1f005d;
+	--color4trans: #1f005dc4;
+	--color5: #0f002e;
+	--color6: #6daedb;
+	--color6trans: #6daedbc4;
+	--color7: #000;
+	--color8: #dd6170;
+	--color9: #ff4646;
+	--color10: #4a74bd;
+	--color11: #181977;
+	font-size: 16px;
 }
 
-.footer{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem; 
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
 }
 
-body{
-  min-height: 100vh;
+body {
+	min-height: 100vh;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
-  width: 0.625rem;
+	width: 0.625rem;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color5);
+	background: var(--color5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color3);
-  border-radius: 0.625rem;
+	background: var(--color3);
+	border-radius: 0.625rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color6);
+	background: var(--color6);
 }
 
-#root{
-  min-height: 100vh;
+#root {
+	min-height: 100vh;
 }
 
-.page{
-  height: 100%;
+.page {
+	height: 100%;
 }
 
-.shadow{
-  -webkit-box-shadow: 1px 16px 16px 8px rgba(0,0,0,0.73); 
-  box-shadow: 1px 16px 16px 8px rgba(0,0,0,0.73);
-  transition: 0.5s;
+.shadow {
+	-webkit-box-shadow: 1px 16px 16px 8px rgba(0, 0, 0, 0.73);
+	box-shadow: 1px 16px 16px 8px rgba(0, 0, 0, 0.73);
+	transition: 0.5s;
 }
 
 .shadowed {
-  -webkit-filter: drop-shadow(1px 16px 16px 8px rgba(0,0,0,0.73));
-  filter: drop-shadow(1px 16px 16px 8px rgba(0,0,0,0.73));
+	-webkit-filter: drop-shadow(1px 16px 16px 8px rgba(0, 0, 0, 0.73));
+	filter: drop-shadow(1px 16px 16px 8px rgba(0, 0, 0, 0.73));
 }
 
-.ripple{
-  position: absolute;
-  z-index: -10;
-  animation: fade 20s;
+.ripple {
+	position: absolute;
+	z-index: -10;
+	animation: fade 20s;
 }
 
-.growin{
-  animation: growin 1s;
+.growin {
+	animation: growin 1s;
 }
 
 @keyframes fade {
-  0%{opacity: 0}
-  10%{opacity: 1}
-  90%{opacity: 1;}
-  100%{opacity: 0;}
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+	0% {
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+	10% {
+		transform: translate(-1px, -2px) rotate(-1deg);
+	}
+	20% {
+		transform: translate(-3px, 0px) rotate(1deg);
+	}
+	30% {
+		transform: translate(3px, 2px) rotate(0deg);
+	}
+	40% {
+		transform: translate(1px, -1px) rotate(1deg);
+	}
+	50% {
+		transform: translate(-1px, 2px) rotate(-1deg);
+	}
+	60% {
+		transform: translate(-3px, 1px) rotate(0deg);
+	}
+	70% {
+		transform: translate(3px, 1px) rotate(-1deg);
+	}
+	80% {
+		transform: translate(-1px, -1px) rotate(1deg);
+	}
+	90% {
+		transform: translate(1px, 2px) rotate(0deg);
+	}
+	100% {
+		transform: translate(1px, -2px) rotate(-1deg);
+	}
 }
 
 @keyframes fadein {
-  0% { opacity: 0;}
-  100% { opacity: 1;}
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 @keyframes growin {
-  0% { 
-    opacity: 0;
-    transform: scale(.5)
-  }
-  100% { 
-    opacity: 1;
-    transform: scale(1)
-  }
+	0% {
+		opacity: 0;
+		transform: scale(0.5);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 .shake {
-  animation: shake 0.5s;
-  animation-iteration-count: infinite;
-  overflow-x: hidden;
+	animation: shake 0.5s;
+	animation-iteration-count: infinite;
+	overflow-x: hidden;
 }

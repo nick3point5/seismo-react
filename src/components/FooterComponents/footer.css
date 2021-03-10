@@ -1,16 +1,7 @@
-.footer{
-  background-color: var(--color4);
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  padding: 0.625rem;
-  height: 2.5rem;
-  width: 100%;
-}
-
-.phantom{
-  display: block;
-  padding: 1.25rem;
-  height: 3.75rem;
-  width: 100%;
+.foot {
+	background-color: var(--color4);
+	bottom: 0rem;
+	padding: 0.625rem;
+	height: 100%;
+	width: 100vw;
 }

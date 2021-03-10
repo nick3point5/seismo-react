@@ -1,126 +1,128 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&family=Roboto&display=swap");
 
-*{
-  color: var(--color1);
-  padding: 0;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
-}
-
-body{
-  background-color: var(--color5);
-  position: relative;
+* {
+	color: var(--color1);
+	padding: 0;
+	margin: 0;
+	font-family: "Roboto", sans-serif;
+	font-size: 1rem;
 }
 
-#root{
-  height: 100%;
+body {
+	background-color: var(--color5);
+	position: relative;
 }
 
-.flex-r{
-  display: flex;
-  flex-direction: row;
+#root {
+	height: 100%;
 }
 
-.flex-c{
-  display: flex;
-  flex-direction: column;
+.flex-r {
+	display: flex;
+	flex-direction: row;
 }
 
-.center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.flex-c {
+	display: flex;
+	flex-direction: column;
 }
 
-.hidden{
-  display: none;
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.view{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
+.hidden {
+	display: none;
 }
 
-.content{
-  width: 62.5rem;
-  animation: fadein 2s;
+.view {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100vw;
+	height: 100%;
+	min-height: 100vh;
 }
 
-.modal{
-  background-color: var(--color4);
+.content {
+	width: 62.5rem;
+	animation: fadein 2s;
+	margin: 0 0 1rem 0;
 }
 
-.modal .modal-footer{
-  background-color: var(--color4);
+.modal {
+	background-color: var(--color4);
 }
 
-nav{
-  width: 100vw;
+.modal .modal-footer {
+	background-color: var(--color4);
 }
 
-.btn{
-  background-color: var(--color3);
-  color: var(--color1);
-  -webkit-box-shadow: 9px 9px 15px 0px #000000; 
-  box-shadow: 9px 9px 15px 0px #000000;
-  transition: 0.5s;
-  border-radius: 1rem;
-  height: 2.25rem;
-  font-size: 1rem;
-  text-align: center;
-  letter-spacing: .5px;
-  line-height: 2.25rem;
-  padding: 0 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.btn:hover{
-  background-color: var(--color6);
-  fill: var(--color7);
-  -webkit-box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.73); 
-  box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.73);
-}
-.btn:focus{
-  background-color: var(--color3);
-  fill: var(--color1);
-  -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0); 
-  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+nav {
+	width: 100vw;
 }
 
-.shadow:hover:not(.base-card){
-  -webkit-box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.73); 
-  box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.73);
+.btn {
+	background-color: var(--color3);
+	color: var(--color1);
+	-webkit-box-shadow: 9px 9px 15px 0px #000000;
+	box-shadow: 9px 9px 15px 0px #000000;
+	transition: 0.5s;
+	border-radius: 1rem;
+	height: 2.25rem;
+	font-size: 1rem;
+	text-align: center;
+	letter-spacing: 0.5px;
+	line-height: 2.25rem;
+	padding: 0 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.btn:hover {
+	background-color: var(--color6);
+	fill: var(--color7);
+	-webkit-box-shadow: 10px 10px 8px -7px rgba(0, 0, 0, 0.73);
+	box-shadow: 10px 10px 8px -7px rgba(0, 0, 0, 0.73);
+}
+.btn:focus {
+	background-color: var(--color3);
+	fill: var(--color1);
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
 }
 
-.shadow:focus:not(.base-card){
-  -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0); 
-  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+.shadow:hover:not(.base-card) {
+	-webkit-box-shadow: 10px 10px 8px -7px rgba(0, 0, 0, 0.73);
+	box-shadow: 10px 10px 8px -7px rgba(0, 0, 0, 0.73);
 }
 
-svg{
-  fill: var(--color1)
+.shadow:focus:not(.base-card) {
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
 }
 
-.base-card{
-  background-color: var(--color4)
+svg {
+	fill: var(--color1);
+}
+
+.base-card {
+	background-color: var(--color4);
 }
 
 @media only screen and (max-width: 1000px) {
+	.content {
+		width: 100vw;
+	}
 
-  .content{ 
-    width: 100vw;
-  }
+	.btn {
+		height: 3rem;
+	}
 
-  .btn{
-    height: 3rem;
-  }
-
-  .base-card{
-    background-color: var(--color4trans)
-  }
-
+	.base-card {
+		background-color: var(--color4trans);
+	}
 }
