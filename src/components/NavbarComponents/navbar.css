@@ -1,0 +1,27 @@
+nav{
+  background-color: var(--color4);
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem;
+  height: 5rem;
+  animation: fadein 2s;
+  width: 100vw;
+}
+
+.nav-name{
+  margin: 0;
+  padding: 0;
+}
+
+.logo-img{
+  height: 3.125rem;
+}
+
+.auth-actions{
+  align-items: center;
+}
+
+.auth-actions a{
+  padding: 0;
+  margin: 0 1.25rem;
+}

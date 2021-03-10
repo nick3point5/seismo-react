@@ -1,0 +1,246 @@
+.post-card{
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  height: 14rem;
+  width: 62.5rem;
+}
+
+.card-content{  
+  width: 100%;
+  height: 100%;
+  margin: 0 1.5rem;
+  background-color: var(--color11);
+}
+
+.card-info{
+  width: 100%;
+}
+
+.post-detail{ 
+  height: 100%;
+  justify-content: space-between;
+
+}
+
+.post-img{  
+  height: 6.25rem;
+  width: 6.25rem;
+}
+.card-stats{  
+  justify-content: space-between;
+  width: 37.5rem;
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+}
+.post-action{ 
+  justify-content: space-between;
+}
+
+.text-content{ 
+  height: 6.25rem;
+  margin: 0 1.5rem;
+  font-size: 1.5rem;
+}
+
+.card-footer{ 
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.card-stats{ 
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 1.5rem;
+}
+
+.delete-btn{  
+  width: 6.25rem;
+  transition: 0.5s;
+  z-index: 1;
+  background-color: var(--color2);
+}
+.delete-btn:hover{  
+  background-color: var(--color8);
+}
+.delete-btn:focus{  
+  background-color: var(--color2);
+}
+
+.edit-btn{  
+  width: 6.25rem;
+}
+
+.confirm{  
+  transform: translate(0,2.25rem);
+  animation: confirm-move 0.5s;
+}
+
+@keyframes confirm-move{
+
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+    transform: translate(0,2.25rem);
+  }
+}
+
+.confirm-message{
+  position: absolute;
+  background-color: var(--color8);
+  height: 2.25rem;
+  width: 6.25rem;
+  line-height: 2.25rem;
+  text-align: center;
+  text-justify: center;
+  transition: 0.5s;
+  cursor:default;
+  border-radius: 1rem;
+}
+
+.delete-container{  
+  position: relative;
+  width: 6.25rem;
+  margin-top: 1.25rem;
+}
+
+.reply-btn{ 
+  width: 6.25rem;
+}
+
+.reply-of-link{ 
+  height: 1.5rem;
+  width: 4.5rem;
+  text-decoration: underline;
+}
+
+.reply-of-link:hover{
+  color: var(--color6);
+}
+
+.reply-filler{  
+  height: 1.5rem;
+  width: 4.5rem;
+}
+
+.post-owner{  
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.25rem;
+  width: 18rem;
+  background-color: var(--color11);
+}
+
+.post-username{ 
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .post-card{
+    margin: 1rem 0;
+    padding: 1.25rem;
+    height: auto;
+    width: 100vw;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .card-info{ 
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-content{  
+    width: 100%;
+    padding: 1rem 0;
+    height: auto;
+    margin: 1rem 1.5rem;
+    background-color: var(--color11);
+    border-radius: 1rem;
+  }
+
+  .post-owner{
+    transform: scale(1);
+    border-radius: 1rem;
+    height: 100%;
+    width: 100%;
+    min-width: 12rem;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 0 2rem 0 ;
+    padding: 1rem 0;
+  }
+
+  .text-content{ 
+    height: auto;
+    margin: 0 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .post-detail{ 
+    justify-content: space-between;
+    min-height: 12rem;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .card-stats{ 
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 1rem 0 0 1rem;
+    }
+  }
+  
+
+
+  .post-action{ 
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 1rem 0;
+  }
+
+  .delete-container{  
+    margin: 0;
+  }
+
+  .confirm-message{
+    position: absolute;
+    background-color: var(--color8);
+    height: 3rem;
+    width: 6.25rem;
+    line-height: 3rem;
+    text-align: center;
+    text-justify: center;
+    transition: 0.5s;
+    cursor:default;
+    border-radius: 1rem;
+  }
+
+  @keyframes confirm-move{
+
+    0% {
+        transform: translate(0,0);
+    }
+  
+    100% {
+      transform: translate(0,3rem);
+    }
+  }
+
+  .confirm{  
+    transform: translate(0,3rem);
+    animation: confirm-move 0.5s;
+  }
+  
+
+  .reply-filler{  
+    height: 3rem;
+    width: 6.25rem;
+  }
+
+}

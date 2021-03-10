@@ -1,0 +1,213 @@
+.user-icon{
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin: 0.5rem;
+  transition: 0.5s;
+  -webkit-box-shadow: 10px 10px 8px -4px rgba(0,0,0,0.73); 
+  box-shadow: 10px 10px 8px -4px rgba(0,0,0,0.73);
+}
+.user-icon:hover{
+  -webkit-box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.73); 
+  box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.73);
+}
+.user-icon:focus{
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0); 
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+}
+
+.profile-card{  
+  width: 62.5rem;
+  min-height: 20rem;
+  margin-top: 1rem;
+  z-index:1;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.profile-img{ 
+  height: 12.5rem;
+  width: 12.5rem;
+}
+
+
+.user-action-btn{  
+  z-index: 1;
+  /* min-width: 3.5rem; */
+  transform: translate(-1.75rem,0);
+  position: absolute;
+}
+
+.profile-nav{ 
+  justify-content: space-between;
+  width: 100%;
+  animation: slide-in 2.5s;
+  transition: 0.5s;
+}
+
+@keyframes slide-in{
+  0%{opacity: 0}
+  80%{
+    opacity: 0;
+    transform: translateY(-5rem);
+  }
+  100%{opacity: 1}
+}
+
+.profile-nav-item{
+  background-color: var(--color6);
+  z-index: 0;
+  height: 5rem;
+  margin: 0 1rem;
+}
+
+.profile-nav-item-btn{
+  padding: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.profile-nav-item.active{
+  background-color: var(--color4);
+  z-index:1;
+  position: relative;
+  -webkit-box-shadow: 5px 16px 9px 5px rgba(0,0,0,0.73); 
+  box-shadow: 5px 16px 9px 5px rgba(0,0,0,0.73);
+}
+
+.profile-username{  
+  font-size: 2rem;
+}
+
+.user-container{  
+  margin: 1rem;
+}
+
+.other-users{ 
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.following-text, .followers-text{
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.followers, .following{
+  height: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.divider{ 
+  width: 0.125rem;
+  top: 10%;
+  position: absolute;
+  height: 80%;
+  background-color: var(--color10);
+}
+
+.follow-container{
+  min-height: 20rem;  
+  height: 100%;
+  position: relative;
+}
+
+.follow-btn{  
+  width: 8rem;
+  z-index: 2;
+  position: absolute;
+}
+
+.user-icons-container{  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .profile-card{  
+    width: 100vh;
+    min-height: 20rem;
+    margin-top: 1rem;
+    z-index:1;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .profile-owner{ 
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-nav-item.active{
+    background-color: var(--color4trans);
+    z-index:1;
+    position: relative;
+    -webkit-box-shadow: 5px 16px 9px 5px rgba(0,0,0,0.73); 
+    box-shadow: 5px 16px 9px 5px rgba(0,0,0,0.73);
+  }
+
+  .user-container{  
+    margin: 1rem;
+    flex-direction: row;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--color11);
+    width: 90vw;
+    justify-content: space-around;
+  }
+  
+  .about-container{ 
+    background-color: var(--color11);
+    width: 90vw;
+    border-radius: 1rem;
+    min-height: 5rem;
+    padding: 1rem;
+  }
+
+  .other-users{
+    flex-direction: column-reverse;
+  }
+
+  .user-action-btn{  
+    z-index: 1;
+    transform: translate(0,-0.5rem);
+    position: relative;
+  }
+
+  .other-users{
+    min-height: 20rem;  
+    position: relative;
+    background-color: var(--color11);
+    border-radius: 1rem;
+    margin: 1rem;
+    width: 90vw;
+  }
+
+  .follow-container{
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .divider-container.d1{
+    display: none;
+  }
+
+  @media only screen and (max-width: 800px) {
+    .profile-nav-item{
+      height: 8rem;
+      transition: 0.5s;
+    }
+  }
+
+}
