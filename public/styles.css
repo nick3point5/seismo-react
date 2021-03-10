@@ -1,17 +1,18 @@
 :root {
 	--color1: #ffd700;
 	--color2: #e71d36;
-	--color3: #7699d4;
+	--color3: #5472b9;
 	--color4: #1f005d;
 	--color4trans: #1f005dc4;
 	--color5: #0f002e;
-	--color6: #6daedb;
-	--color6trans: #6daedbc4;
+	--color6: #7699d4;
+	--color6trans: #7699d4;
 	--color7: #000;
 	--color8: #dd6170;
 	--color9: #ff4646;
 	--color10: #4a74bd;
 	--color11: #181977;
+	--color12: #ffd900;
 	font-size: 16px;
 }
 
