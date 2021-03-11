@@ -3,7 +3,7 @@ document.body.onload = function () {
 		const body = document.body;
 		const fillRatio = 0.3;
 		const area = body.clientHeight * body.clientWidth;
-		const speed = 2;
+		const speed = 3;
 		const num_ripples = Math.ceil(area/40000*fillRatio);
 
 		function getRand(max, min) {
