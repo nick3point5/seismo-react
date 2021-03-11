@@ -12,7 +12,7 @@ const auth = firebase.auth()
 export class HomePage extends Component {
   state = {
     posts: '',
-    updatePost: false,
+    updatePosts: false,
   }
 
   componentDidMount() {
@@ -25,7 +25,7 @@ export class HomePage extends Component {
     if (this.state.updatePost) {
       this.fetchData()
       this.setState({
-        updatePost: false
+        updatePosts: false
       })
     }
   }

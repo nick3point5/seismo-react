@@ -15,7 +15,7 @@ export class Details extends Component {
 
   state = {
     id: this.props.match.params.id,
-    updatePost: false,
+    updatePosts: false,
   }
 
   componentDidMount() {
@@ -34,7 +34,7 @@ export class Details extends Component {
     if (this.state.updatePost) {
       this.fetchData(this.props.match.params.id)
       this.setState({
-        updatePost: false
+        updatePosts: false
       })
     }
   }
