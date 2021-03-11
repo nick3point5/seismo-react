@@ -29,9 +29,7 @@ function Auth(props) {
 function SignOut(props) {
 
   return auth.currentUser && (
-    <div className="">
-      <button onClick={() => { props.functions.handleLogout() }} className="btn nav-item" title="logout"><LogoutIcon /></button>
-    </div>
+      <button onClick={() => { props.functions.handleLogout() }} className="btn" title="logout"><LogoutIcon /></button>
   )
 }
 
