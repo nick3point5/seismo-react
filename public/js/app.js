@@ -4,7 +4,7 @@ document.body.onload = function () {
 		const fillRatio = 0.3;
 		const area = body.clientHeight * body.clientWidth;
 		const speed = 2;
-		const num_ripples = area/40000*fillRatio;
+		const num_ripples = Math.ceil(area/40000*fillRatio);
 
 		function getRand(max, min) {
 			let num = Math.random() * (max + 1 - min) + min - 1;
@@ -34,7 +34,7 @@ document.body.onload = function () {
 			$("#ripple" + i).remove();
 			makeRipple(i);
 			i++;
-			if (i === num_ripples) {
+			if (i >= num_ripples) {
 				i = 0;
 			}
 		}, 2000);
