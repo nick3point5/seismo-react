@@ -3,38 +3,64 @@ import Posts from '../../components/PostsComponents/Posts'
 import Profile from '../../components/ProfileComponents/Profile'
 import { withRouter, Redirect } from "react-router";
 import seismoApiUrl from "../../config/Api";
+import { wsSeismoApiUrl } from "../../config/Api";
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import {Navbar} from '../../components/NavbarComponents/NavBar'
+import { Navbar } from '../../components/NavbarComponents/NavBar'
 
-
-const auth =firebase.auth()
+const socket = new WebSocket(wsSeismoApiUrl);
+const auth = firebase.auth()
 export class UserPage extends Component {
-  state={
-    id:this.props.match.params.id,
-    photo:'',
+  state = {
+    id: this.props.match.params.id,
+    photo: '',
     profile: '',
     displayName: '',
-    about:''
+    about: '',
+    updatePost: false,
+    updateFollow: false,
+    updateProfile: false,
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchData.all(this.props.match.params.id)
     this.init.logo()
+    this.init.socket()
   }
 
   componentDidUpdate() {
     if (this.props.match.params.id !== this.state.id) {
-      
+
       this.fetchData.all(this.props.match.params.id)
       this.setState({
-        id:this.props.match.params.id
+        id: this.props.match.params.id
+      })
+    }
+    if (this.state.updatePost) {
+      this.fetchData.userPosts(this.props.match.params.id)
+      this.fetchData.feedTime(this.props.match.params.id)
+      this.fetchData.feedMag(this.props.match.params.id)
+      this.setState({
+        updatePost: false
+      })
+    }
+    if (this.state.updateFollow) {
+      this.fetchData.followers(this.props.match.params.id)
+      this.fetchData.following(this.props.match.params.id)
+      this.setState({
+        updateFollow: false
+      })
+    }
+    if (this.state.updateProfile) {
+      this.fetchData.user(this.props.match.params.id)
+      this.setState({
+        updateProfile: false
       })
     }
   }
 
-  init= {
-    logo:()=>{
+  init = {
+    logo: () => {
       const logoEle = document.getElementById("nav-logo");
       logoEle.addEventListener("mouseover", () => {
         logoEle.classList.add("shake");
@@ -43,97 +69,117 @@ export class UserPage extends Component {
         logoEle.classList.remove("shake");
       });
     },
+    socket: () => {
+      socket.onmessage = (message) => {
+        let data = JSON.parse(message.data);
+        if (data.message === 'updatePosts') {
+          this.setState({
+            updatePost: true
+          })
+        }
+        if (data.message === 'updateFollow') {
+          this.setState({
+            updateFollow: true
+          })
+        }
+        if (data.message === 'updateProfile') {
+          this.setState({
+            updateProfile: true
+          })
+        }
+      };
+
+    },
   }
 
-
-  fetchData={
-    user:(user_id)=>{
-      fetch(`${seismoApiUrl}/user/${user_id}`,{
-        method:'GET'
+  fetchData = {
+    user: (user_id) => {
+      fetch(`${seismoApiUrl}/user/${user_id}`, {
+        method: 'GET'
       })
-        .then(res=>{
+        .then(res => {
           return res.json()
         })
-        .then(data=>{
-          if(data){
+        .then(data => {
+          if (data) {
             this.setState({
               profile: data,
               displayName: data.username,
-              about:data.about
+              about: data.about
             })
-          }else{
+          } else {
             this.setState({
-              redirect:true
+              redirect: true
             })
           }
         })
     },
-    followers:(user_id)=>{
-      fetch(`${seismoApiUrl}/user/getfollowers/${user_id}`,{
-        method:'GET'
+    followers: (user_id) => {
+      fetch(`${seismoApiUrl}/user/getfollowers/${user_id}`, {
+        method: 'GET'
       })
-        .then(res=>{
+        .then(res => {
           return res.json()
         })
-        .then(data=>{
+        .then(data => {
           this.setState({
             followers: data
           })
         })
     },
-    following:(user_id)=>{
-      fetch(`${seismoApiUrl}/user/getfollowing/${user_id}`,{
-        method:'GET'
+    following: (user_id) => {
+      fetch(`${seismoApiUrl}/user/getfollowing/${user_id}`, {
+        method: 'GET'
       })
-        .then(res=>{
+        .then(res => {
           return res.json()
         })
-        .then(data=>{
+        .then(data => {
           this.setState({
             following: data
           })
         })
     },
-    userPosts:(user_id)=>{
-      fetch(`${seismoApiUrl}/user/getposts/${user_id}`,{
-        method:'GET'
+    userPosts: (user_id) => {
+      fetch(`${seismoApiUrl}/user/getposts/${user_id}`, {
+        method: 'GET'
       })
-        .then(res=>{
+        .then(res => {
           return res.json()
         })
-        .then(data=>{
+        .then(data => {
           this.setState({
             recentPosts: data,
           })
         })
     },
-    feedTime:(user_id)=>{
-      fetch(`${seismoApiUrl}/user/feedtime/${user_id}`,{
-        method:'GET'
+    feedTime: (user_id) => {
+      fetch(`${seismoApiUrl}/user/feedtime/${user_id}`, {
+        method: 'GET'
       })
-        .then(res=>{
+        .then(res => {
           return res.json()
         })
-        .then(data=>{
+        .then(data => {
           this.setState({
             feedTimePost: data
           })
         })
     },
-    feedMag:(user_id)=>{
-      fetch(`${seismoApiUrl}/user/feedmag/${user_id}`,{
-        method:'GET'
+    feedMag: (user_id) => {
+      fetch(`${seismoApiUrl}/user/feedmag/${user_id}`, {
+        method: 'GET'
       })
-        .then(res=>{
+        .then(res => {
           return res.json()
         })
-        .then(data=>{
+        .then(data => {
           this.setState({
             feedMagPost: data
           })
         })
     },
-    all:(user_id)=>{
+    all: (user_id) => {
       this.fetchData.user(user_id)
       this.fetchData.userPosts(user_id)
       this.fetchData.followers(user_id)
@@ -143,21 +189,21 @@ export class UserPage extends Component {
     }
   }
 
-  handle={
-    change:(event)=>{
+  handle = {
+    change: (event) => {
       event.preventDefault();
-      if (event.target.files&&event.target.files[0]) {
-        this.setState({  
-          photo:event.target.files[0]
-        });
-      } else{
+      if (event.target.files && event.target.files[0]) {
         this.setState({
-          [event.target.id]:event.target.value
+          photo: event.target.files[0]
+        });
+      } else {
+        this.setState({
+          [event.target.id]: event.target.value
         });
       }
     },
-    new:(event,user,postId='')=>{
-      event.preventDefault()  
+    new: (event, user, postId = '') => {
+      event.preventDefault()
       const obj = {
         comment: this.state.comment,
         author: user.displayName,
@@ -165,244 +211,89 @@ export class UserPage extends Component {
         img: user.photoURL,
       }
       document.getElementById('form-btn-close').click()
-      
-      
-      fetch(`${seismoApiUrl}/post/${postId}`,{
-          method: 'Post',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(
-            obj
-          ),
-        })
-        .then((res)=>{
-          this.fetchData.userPosts(this.props.match.params.id)
-          this.fetchData.feedTime(this.props.match.params.id)
-          this.fetchData.feedMag(this.props.match.params.id)
+
+
+      fetch(`${seismoApiUrl}/post/${postId}`, {
+        method: 'Post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          obj
+        ),
+      })
+        .then((res) => {
+          socket.send(JSON.stringify({ message: 'updatePosts' }))
           this.setState({
-            comment:''
+            comment: ''
           })
         }
         )
         .catch((err) => console.log(err));
     },
-    update:(event,postId='')=>{
-      
+    update: (event, postId = '') => {
+
       event.preventDefault()
       const obj = {
         comment: this.state.comment,
       }
-      
-      fetch(`${seismoApiUrl}/post/${postId}`,{
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(
-            obj
-          ),
-        })
-        .then((res)=>{
-          this.fetchData.userPosts(this.props.match.params.id)
+
+      fetch(`${seismoApiUrl}/post/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          obj
+        ),
+      })
+        .then((res) => {
+          socket.send(JSON.stringify({ message: 'updatePosts' }))
           this.setState({
-            comment:''
+            comment: ''
           })
         }
         )
         .catch((err) => console.log(err));
     },
-    delete:(postId) => {
+    delete: (postId) => {
       fetch(`${seismoApiUrl}/post/${postId}`, {
         method: 'DELETE',
       })
-      .then((response) => {
-        return response.json();
-      })
-      .then(() => {
-        this.fetchData.userPosts(this.props.match.params.id)
-      })
-      .catch((err) => console.log(err));
+        .then((response) => {
+          return response.json();
+        })
+        .then(() => {
+          socket.send(JSON.stringify({ message: 'updatePosts' }))
+        })
+        .catch((err) => console.log(err));
     },
-    userDelete:(user) => {
-      console.log(user.uid)
+    userDelete: (user) => {
       auth.signOut()
-      user.delete().then(function() {
-      }).catch(function(error) {
+      user.delete().then(function () {
+      }).catch(function (error) {
       });
-      
+
       fetch(`${seismoApiUrl}/user/${user.uid}`, {
         method: 'DELETE',
       })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data)
-        this.setState({
-          redirect:true
+        .then((response) => {
+          return response.json();
         })
-      })
-      .catch((err) => console.log(err));
-    },
-    follow:(user)=>{
-      const obj={
-        id: user.uid
-      }
-      
-      fetch(`${seismoApiUrl}/user/follow/${this.state.profile._id}`,{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(
-            obj
-          ),
-        })
-        .then((res) => {
-          return res.json()
-        })
-        .then((data)=>{
-          
-          if (!data.message) {
-            this.setState({
-              followers: data
-            })
-          }else{
-            console.log(data)
-          }
-        })
-        
-        .catch((err) => console.log(err));
-    },
-    unFollow:(user)=>{
-      const obj={
-        id: user.uid
-      }
-      
-      
-      fetch(`${seismoApiUrl}/user/unfollow/${this.state.profile._id}`,{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(
-            obj
-          ),
-      })
-        .then((res) => {
-          return res.json()
-        })
-        .then((data)=>{
-          
-          if (!data.message) {
-            this.setState({
-              followers: data
-            })
-          }else{
-            console.log(data)
-          }
-  
-        })
-  
-        .catch((err) => console.log(err));
-    },
-    active:(id)=>{
-      const posts = document.querySelectorAll('.profile-posts')
-      document.querySelectorAll('.profile-nav-item').forEach((item,i)=>{
-        if (i !== id) {
-          item.classList.remove('active')
-          posts[i].classList.add('hidden')
-        }else{
-          item.classList.add('active')
-          posts[i].classList.remove('hidden')
-        } 
-        
-      })
-      
-    },
-    updateProfile:(user)=>{
-      if (this.state.photo) {
-        firebase.storage()
-        .ref(`users/${user.uid}/profile.png`)
-        .put(this.state.photo)
-        .then((snapshot)=>{
-          snapshot.ref.getDownloadURL()
-            .then((downloadURL)=>{
-              const updateObj={
-                displayName: this.state.displayName,
-                photoURL: downloadURL
-              }
-  
-              user.updateProfile(
-                updateObj
-              )
-  
-              const obj = {
-                username: this.state.displayName,
-                img: downloadURL,
-                about: this.state.about,
-              }
-              
-              fetch(`${seismoApiUrl}/user/${user.uid}`,{
-                  method: 'PUT',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(
-                    obj
-                  ),
-                })
-                .then(() => {
-                  this.fetchData.user(this.props.match.params.id)
-                  this.setState({
-                    photo: ''
-                  })
-                })
-                .catch((err) => console.log(err));
-  
-            })
-            .catch((err)=>console.log(err))
-        })
-        
-      }else{
-        const updateObj = {
-          username: this.state.displayName,
-          about: this.state.about,
-        }
-
-        fetch(`${seismoApiUrl}/user/${user.uid}`,{
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(
-            updateObj
-          ),
-        })
-        .then(() => {
-          this.fetchData.user(this.props.match.params.id)
-          user.updateProfile({
-              displayName: this.state.displayName
-          })
-  
+        .then((data) => {
+          socket.send(JSON.stringify({ message: 'updateProfile' }))
           this.setState({
-            photo: ''
+            redirect: true
           })
         })
         .catch((err) => console.log(err));
-  
-      }
-      
     },
-    login:(user)=>{
+    follow: (user) => {
       const obj = {
-        username: user.displayName,
-        uid: user.uid,
-        img: user.photoURL
+        id: user.uid
       }
-  
-      fetch(`${seismoApiUrl}/user/login`,{
+
+      fetch(`${seismoApiUrl}/user/follow/${this.state.profile._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -411,104 +302,252 @@ export class UserPage extends Component {
           obj
         ),
       })
-      .then((res)=>{
-        this.setState({
-          user: auth.currentUser,
-          loggedIn:true
+        .then((res) => {
+          return res.json()
         })
-        return res.json();
-      })
-      .catch((err) => console.log(err));
+        .then((data) => {
+
+          if (!data.message) {
+            socket.send(JSON.stringify({ message: 'updateFollow' }))
+          } else {
+            console.log(data)
+          }
+        })
+
+        .catch((err) => console.log(err));
     },
-    logout:()=>{
+    unFollow: (user) => {
+      const obj = {
+        id: user.uid
+      }
+
+
+      fetch(`${seismoApiUrl}/user/unfollow/${this.state.profile._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          obj
+        ),
+      })
+        .then((res) => {
+          return res.json()
+        })
+        .then((data) => {
+
+          if (!data.message) {
+            socket.send(JSON.stringify({ message: 'updateFollow' }))
+          } else {
+            console.log(data)
+          }
+
+        })
+
+        .catch((err) => console.log(err));
+    },
+    active: (id) => {
+      const posts = document.querySelectorAll('.profile-posts')
+      document.querySelectorAll('.profile-nav-item').forEach((item, i) => {
+        if (i !== id) {
+          item.classList.remove('active')
+          posts[i].classList.add('hidden')
+        } else {
+          item.classList.add('active')
+          posts[i].classList.remove('hidden')
+        }
+
+      })
+
+    },
+    updateProfile: (user) => {
+      if (this.state.photo) {
+        firebase.storage()
+          .ref(`users/${user.uid}/profile.png`)
+          .put(this.state.photo)
+          .then((snapshot) => {
+            snapshot.ref.getDownloadURL()
+              .then((downloadURL) => {
+                const updateObj = {
+                  displayName: this.state.displayName,
+                  photoURL: downloadURL
+                }
+
+                user.updateProfile(
+                  updateObj
+                )
+
+                const obj = {
+                  username: this.state.displayName,
+                  img: downloadURL,
+                  about: this.state.about,
+                }
+
+                fetch(`${seismoApiUrl}/user/${user.uid}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(
+                    obj
+                  ),
+                })
+                  .then(() => {
+                    socket.send(JSON.stringify({ message: 'updateProfile' }))
+                    this.setState({
+                      photo: ''
+                    })
+                  })
+                  .catch((err) => console.log(err));
+
+              })
+              .catch((err) => console.log(err))
+          })
+
+      } else {
+        const updateObj = {
+          username: this.state.displayName,
+          about: this.state.about,
+        }
+
+        fetch(`${seismoApiUrl}/user/${user.uid}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            updateObj
+          ),
+        })
+          .then(() => {
+            socket.send(JSON.stringify({ message: 'updateProfile' }))
+            user.updateProfile({
+              displayName: this.state.displayName
+            })
+
+            this.setState({
+              photo: ''
+            })
+          })
+          .catch((err) => console.log(err));
+
+      }
+
+    },
+    login: (user) => {
+      const obj = {
+        username: user.displayName,
+        uid: user.uid,
+        img: user.photoURL
+      }
+
+      fetch(`${seismoApiUrl}/user/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          obj
+        ),
+      })
+        .then((res) => {
+          this.setState({
+            user: auth.currentUser,
+            loggedIn: true
+          })
+          return res.json();
+        })
+        .catch((err) => console.log(err));
+    },
+    logout: () => {
       auth.signOut()
       this.setState({
         user: auth.currentUser,
-        loggedIn:false
-      })    
+        loggedIn: false
+      })
     },
   }
-  
+
   render() {
     const postFunctions = {
-      handleNew:this.handle.new,
-      handleChange:this.handle.change,
-      handleDelete:this.handle.delete,
-      handleUpdate:this.handle.update,
+      handleNew: this.handle.new,
+      handleChange: this.handle.change,
+      handleDelete: this.handle.delete,
+      handleUpdate: this.handle.update,
     }
 
-    const profileFunctions ={
-      handleFollow:this.handle.follow,
-      handleUnFollow:this.handle.unFollow,
-      fetchFollowers:this.fetchData.followers,
-      handleChange:this.handle.change,
-      handleUpdate:this.handle.updateProfile,
-      handleUserDelete:this.handle.userDelete,
+    const profileFunctions = {
+      handleFollow: this.handle.follow,
+      handleUnFollow: this.handle.unFollow,
+      fetchFollowers: this.fetchData.followers,
+      handleChange: this.handle.change,
+      handleUpdate: this.handle.updateProfile,
+      handleUserDelete: this.handle.userDelete,
     }
 
-    const profileState={
-      profile:this.state.profile,
-      followers:this.state.followers,
-      following:this.state.following,
-      displayName:this.state.displayName,
-      about:this.state.about,
+    const profileState = {
+      profile: this.state.profile,
+      followers: this.state.followers,
+      following: this.state.following,
+      displayName: this.state.displayName,
+      about: this.state.about,
     }
 
     const navFunctions = {
-      new:this.handle.new,
-      change:this.handle.change,
-      login:this.handle.login,
-      logout:this.handle.logout,
+      new: this.handle.new,
+      change: this.handle.change,
+      login: this.handle.login,
+      logout: this.handle.logout,
     }
 
     return (
       <>
-        <Navbar handle={navFunctions} state={this.state}/>
+        <Navbar handle={navFunctions} state={this.state} />
         <div className="user-page content">
           <div className="profile-owner growin">
-            <Profile functions={profileFunctions} state={profileState}/>
-            
+            <Profile functions={profileFunctions} state={profileState} />
+
           </div>
           <div className="profile-nav flex-r">
-            <div className="profile-nav-item active growin" id="recent-posts-tab" onClick={()=>{
+            <div className="profile-nav-item active growin" id="recent-posts-tab" onClick={() => {
               this.handle.active(0)
             }}
             >
               <p className="profile-nav-item-btn">Recent Posts</p>
             </div>
-            <div className="profile-nav-item" id="recent-feed-tab" onClick={()=>{
+            <div className="profile-nav-item" id="recent-feed-tab" onClick={() => {
               this.handle.active(1)
             }}>
               <p className="profile-nav-item-btn">Recent Feed</p>
             </div>
-            <div className="profile-nav-item" id="mag-feed-tab" onClick={()=>{
+            <div className="profile-nav-item" id="mag-feed-tab" onClick={() => {
               this.handle.active(2)
             }}>
               <p className="profile-nav-item-btn">Magnitude Feed</p>
             </div>
           </div>
-          {this.state.recentPosts?
+          {this.state.recentPosts ?
             <div className="recent-posts profile-posts">
-              <Posts functions={postFunctions} posts={this.state.recentPosts}/>
-            </div>:
+              <Posts functions={postFunctions} posts={this.state.recentPosts} />
+            </div> :
             <></>
           }
-          {this.state.feedTimePost?
+          {this.state.feedTimePost ?
             <div className="feed-time profile-posts hidden">
-              <Posts functions={postFunctions} posts={this.state.feedTimePost}/>
-            </div>:
+              <Posts functions={postFunctions} posts={this.state.feedTimePost} />
+            </div> :
             <></>
           }
-          {this.state.feedMagPost?
+          {this.state.feedMagPost ?
             <div className="feed-mag profile-posts hidden">
-              <Posts functions={postFunctions} posts={this.state.feedMagPost}/>
-            </div>:
+              <Posts functions={postFunctions} posts={this.state.feedMagPost} />
+            </div> :
             <></>
           }
         </div>
-        {this.state.redirect?<Redirect to="/"/>:''}
+        {this.state.redirect ? <Redirect to="/" /> : ''}
       </>
-      
+
     )
   }
 }

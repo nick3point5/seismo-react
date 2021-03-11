@@ -4,7 +4,7 @@ import './profile.css'
 import logo from '../../assets/logo_small.png'
 import 'firebase/auth'
 import firebase from 'firebase/app'
-import SettingsForm from '../PostsComponents/FormsComponents/SettingsForm'
+import SettingsForm from '../FormComponents/SettingsForm'
 
 const auth = firebase.auth()
 
@@ -80,12 +80,15 @@ function profileCard(state, functions) {
       </div>
 
       <div className="other-users flex-c">
-        {(user && (user.uid !== profile.uid)) ?
-          (checkFollowers(followers) ?
-            <button className="btn user-action-btn" onClick={() => { functions.handleUnFollow(user) }}>UnFollow</button> :
-            <button className="btn user-action-btn" onClick={() => { functions.handleFollow(user) }}>Follow</button>) :
-          (user && user.uid === profile.uid) ? <SettingsForm functions={functions} displayName={displayName} about={about} /> : ''
-        }
+        <div className="user-action-container center">
+          {
+            (user && (user.uid !== profile.uid)) ?
+              (checkFollowers(followers) ?
+                <button className="btn user-action-btn" onClick={() => { functions.handleUnFollow(user) }}>UnFollow</button> :
+                <button className="btn user-action-btn" onClick={() => { functions.handleFollow(user) }}>Follow</button>) :
+              (user && user.uid === profile.uid) ? <SettingsForm functions={functions} displayName={displayName} about={about} /> : ''
+          }
+        </div>
         <div className="follow-container flex-r">
           <div className="divider-container d1">
             <div className="divider d1"></div>

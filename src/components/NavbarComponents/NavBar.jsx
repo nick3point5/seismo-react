@@ -5,7 +5,7 @@ import Auth from './Auth'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import logo from '../../assets/siesmo_name.png'
-import NewForm from '../PostsComponents/FormsComponents/NewForm'
+import NewForm from '../FormComponents/NewForm'
 import { HomeIcon } from '../IconComponents/Icon';
 
 const auth = firebase.auth()

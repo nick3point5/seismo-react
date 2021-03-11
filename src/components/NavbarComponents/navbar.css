@@ -31,16 +31,15 @@ nav {
 }
 
 @media only screen and (max-width: 500px) {
-	nav.base-card{
+	nav.base-card {
 		flex-direction: column;
 		height: 10rem;
-		
 	}
-	.nav-actions{
+	.nav-actions {
 		width: 100vw;
 		justify-content: space-around;
 	}
-	ul{
+	ul {
 		width: 100vw;
 		justify-content: space-around;
 	}

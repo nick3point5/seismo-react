@@ -47,74 +47,7 @@ document.body.onload = function () {
 		}, 1500);
 	}
 
-	function logoShake() {
-		const logoEle = document.getElementById("nav-logo");
-		logoEle.addEventListener("mouseover", () => {
-			logoEle.classList.add("shake");
-		});
-		logoEle.addEventListener("mouseout", () => {
-			logoEle.classList.remove("shake");
-		});
-	}
-
-	function socketOpen() {
-		let socket = new WebSocket('ws://localhost:4000/');
-		socket.onopen = function() {
-			console.log('Socket open.');
-			socket.send(JSON.stringify({message: 'What is the meaning of life, the universe and everything?'}));
-			console.log('Message sent.')
-		};
-		socket.onmessage = function(message) {
-
-			console.log('Socket server message', message);
-			let data = JSON.parse(message.data);
-		};
-	}
-
 	rippleEffect();
 	bodyShake();
 
 };
-
-// document.body.onload = function() {
-		
-// 	'use strict';
-
-// function socketExample() {
-// 	console.log('Creating socket');
-// 	let socket = new WebSocket('ws://localhost:4000/');
-// 	socket.onopen = function() {
-
-// 		console.log('Socket open.');
-// 		socket.send(JSON.stringify({message: 'What is the meaning of life, the universe and everything?'}));
-// 		console.log('Message sent.')
-// 	};
-// 	socket.onmessage = function(message) {
-
-// 		console.log('Socket server message', message);
-// 		let data = JSON.parse(message.data);
-// 	};
-// }
-
-// // Now the simple POST demo
-// function postExample() {
-
-// 	console.log('Creating regular POST message');
-
-// 	fetch(`http://localhost:4000/post/get10`,{
-// 		method:'GET'
-// 	})
-// 		.then(res=>{
-// 			return res.json()
-// 		})
-// 		.then(data=>{
-// 			console.log(data)
-// 		})
-// 		.catch((err) => console.log(err)); 
-// }
-
-// // Call them both;
-
-// socketExample();
-// postExample();
-// }

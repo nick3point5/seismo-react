@@ -1,7 +1,7 @@
 import React from 'react'
 import './posts.css'
-import EditForm from './FormsComponents/EditForm'
-import ReplyForm from './FormsComponents/ReplyForm'
+import EditForm from '../FormComponents/EditForm'
+import ReplyForm from '../FormComponents/ReplyForm'
 import { Link } from 'react-router-dom';
 import 'firebase/auth'
 import firebase from 'firebase/app'
