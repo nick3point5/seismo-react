@@ -58,6 +58,7 @@ export class HomePage extends Component {
     socket: () => {
       socket.onmessage = (message) => {
         let data = JSON.parse(message.data);
+
         if (data.message === 'updatePosts') {
           this.setState({
             updatePost: true
