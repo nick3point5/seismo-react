@@ -1,6 +1,5 @@
 let seismoApiUrl, wsSeismoApiUrl
-const local = true
-if (local) {
+if (process.env.REACT_APP_PRODUCTION) {
   seismoApiUrl = 'http://localhost:4000'
   wsSeismoApiUrl = 'ws://localhost:4000'
 } else {
