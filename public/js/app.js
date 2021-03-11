@@ -37,7 +37,7 @@ document.body.onload = function () {
 			if (i === num_ripples) {
 				i = 0;
 			}
-		}, speed*1000);
+		}, 2000);
 	}
 
 	function bodyShake() {
