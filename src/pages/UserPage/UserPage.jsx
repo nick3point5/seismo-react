@@ -17,7 +17,7 @@ export class UserPage extends Component {
     profile: '',
     displayName: '',
     about: '',
-    updatePost: false,
+    updatePosts: false,
     updateFollow: false,
     updateProfile: false,
   }
@@ -36,12 +36,12 @@ export class UserPage extends Component {
         id: this.props.match.params.id
       })
     }
-    if (this.state.updatePost) {
+    if (this.state.updatePosts) {
       this.fetchData.userPosts(this.props.match.params.id)
       this.fetchData.feedTime(this.props.match.params.id)
       this.fetchData.feedMag(this.props.match.params.id)
       this.setState({
-        updatePost: false
+        updatePosts: false
       })
     }
     if (this.state.updateFollow) {
@@ -74,7 +74,7 @@ export class UserPage extends Component {
         let data = JSON.parse(message.data);
         if (data.message === 'updatePosts') {
           this.setState({
-            updatePost: true
+            updatePosts: true
           })
         }
         if (data.message === 'updateFollow') {

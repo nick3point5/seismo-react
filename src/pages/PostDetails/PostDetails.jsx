@@ -31,7 +31,7 @@ export class Details extends Component {
         id: this.props.match.params.id
       })
     }
-    if (this.state.updatePost) {
+    if (this.state.updatePosts) {
       this.fetchData(this.props.match.params.id)
       this.setState({
         updatePosts: false
@@ -54,7 +54,7 @@ export class Details extends Component {
         let data = JSON.parse(message.data);
         if (data.message === 'updatePosts') {
           this.setState({
-            updatePost: true
+            updatePosts: true
           })
         }
       };

@@ -22,7 +22,7 @@ export class HomePage extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.updatePost) {
+    if (this.state.updatePosts) {
       this.fetchData()
       this.setState({
         updatePosts: false
@@ -61,7 +61,7 @@ export class HomePage extends Component {
 
         if (data.message === 'updatePosts') {
           this.setState({
-            updatePost: true
+            updatePosts: true
           })
         }
       };
