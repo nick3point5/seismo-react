@@ -5,7 +5,7 @@ if (process.env.REACT_APP_PRODUCTION) {
   wsSeismoApiUrl = `wss://${process.env.REACT_APP_SEISMO_API_URL}`
 } else {
   seismoApiUrl = 'http://localhost:4000'
-  wsSeismoApiUrl = 'wss://localhost:4000'
+  wsSeismoApiUrl = 'ws://localhost:4000'
 }
 
 export { wsSeismoApiUrl }

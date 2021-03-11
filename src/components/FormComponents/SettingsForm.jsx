@@ -41,7 +41,7 @@ function SettingsForm(props) {
           onChange={props.functions.handleChange}
           autoComplete="off"
           value={props.about}
-          maxLength="12"
+          maxLength="500"
         />
         <br />
         <label htmlFor="">Upload Profile Pic</label>

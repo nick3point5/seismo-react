@@ -9,6 +9,7 @@ import { Navbar } from '../../components/NavbarComponents/NavBar'
 
 const socket = new WebSocket(wsSeismoApiUrl);
 const auth = firebase.auth()
+
 export class HomePage extends Component {
   state = {
     posts: '',
@@ -58,6 +59,10 @@ export class HomePage extends Component {
     socket: () => {
       socket.onmessage = (message) => {
         let data = JSON.parse(message.data);
+
+        socket.onopen = function() {
+          socket.send(JSON.stringify({message: 'New Guy'}))
+        };
 
         if (data.message === 'updatePosts') {
           this.setState({
