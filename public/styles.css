@@ -66,7 +66,7 @@ body {
 .ripple {
 	position: absolute;
 	z-index: -10;
-	animation: fade 20s;
+	animation: fade 30s;
 }
 
 .growin {

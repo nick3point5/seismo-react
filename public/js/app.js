@@ -37,7 +37,7 @@ document.body.onload = function () {
 			if (i >= num_ripples) {
 				i = 0;
 			}
-		}, 2000);
+		}, 30000/num_ripples);
 	}
 
 	function bodyShake() {
