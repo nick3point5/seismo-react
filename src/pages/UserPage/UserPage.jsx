@@ -20,13 +20,7 @@ export class UserPage extends Component {
 
   componentDidMount(){
     this.fetchData.all(this.props.match.params.id)
-    const logoEle = document.getElementById("nav-logo");
-		logoEle.addEventListener("mouseover", () => {
-			logoEle.classList.add("shake");
-		});
-		logoEle.addEventListener("mouseout", () => {
-			logoEle.classList.remove("shake");
-		});
+    this.init.logo()
   }
 
   componentDidUpdate() {
@@ -38,6 +32,19 @@ export class UserPage extends Component {
       })
     }
   }
+
+  init= {
+    logo:()=>{
+      const logoEle = document.getElementById("nav-logo");
+      logoEle.addEventListener("mouseover", () => {
+        logoEle.classList.add("shake");
+      });
+      logoEle.addEventListener("mouseout", () => {
+        logoEle.classList.remove("shake");
+      });
+    },
+  }
+
 
   fetchData={
     user:(user_id)=>{

@@ -2,26 +2,45 @@ import React, { Component } from 'react'
 import './homepage.css'
 import Posts from '../../components/PostsComponents/Posts'
 import seismoApiUrl from "../../config/Api";
+import {wsSeismoApiUrl} from "../../config/Api";
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import {Navbar} from '../../components/NavbarComponents/NavBar'
 
-
+const socket = new WebSocket(wsSeismoApiUrl);
 const auth =firebase.auth()
 export class HomePage extends Component {
   state={
     posts: '',
   }
-  
+
   componentDidMount(){
     this.fetchData()
-    const logoEle = document.getElementById("nav-logo");
-		logoEle.addEventListener("mouseover", () => {
-			logoEle.classList.add("shake");
-		});
-		logoEle.addEventListener("mouseout", () => {
-			logoEle.classList.remove("shake");
-		});
+    this.init.logo()
+    this.init.socket()
+  }
+
+  init = {
+    logo:()=>{
+      const logoEle = document.getElementById("nav-logo");
+      logoEle.addEventListener("mouseover", () => {
+        logoEle.classList.add("shake");
+      });
+      logoEle.addEventListener("mouseout", () => {
+        logoEle.classList.remove("shake");
+      });
+    },
+    socket:()=>{
+      socket.onopen = function() {
+        socket.send(JSON.stringify({message: 'New Guy'}))
+        console.log('Socket open.');
+      };
+      socket.onmessage = function(message) {
+        let data = JSON.parse(message.data);
+        console.log(data)
+      };
+
+    }
   }
 
   fetchData=()=>{
@@ -54,7 +73,8 @@ export class HomePage extends Component {
         ownerId: user.uid,
         img: user.photoURL,
       }
-      document.getElementById('form-btn-close').click()
+      socket.send(JSON.stringify({message: 'New Post'}))
+      document.querySelectorAll('#form-btn-close').forEach(x=>x.click())
       
       fetch(`${seismoApiUrl}/post/${postId}`,{
           method: 'Post',

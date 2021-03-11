@@ -18,13 +18,7 @@ export class Details extends Component {
 
   componentDidMount(){
     this.fetchData(this.props.match.params.id)
-    const logoEle = document.getElementById("nav-logo");
-		logoEle.addEventListener("mouseover", () => {
-			logoEle.classList.add("shake");
-		});
-		logoEle.addEventListener("mouseout", () => {
-			logoEle.classList.remove("shake");
-		});
+    this.init.logo()
   }
 
   componentDidUpdate() {
@@ -35,6 +29,19 @@ export class Details extends Component {
       })
     }
   }
+
+  init= {
+    logo:()=>{
+      const logoEle = document.getElementById("nav-logo");
+      logoEle.addEventListener("mouseover", () => {
+        logoEle.classList.add("shake");
+      });
+      logoEle.addEventListener("mouseout", () => {
+        logoEle.classList.remove("shake");
+      });
+    },
+  }
+
   fetchData=(post_id)=>{
     if(post_id.length !== 24){
       this.setState({

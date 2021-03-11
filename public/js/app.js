@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+document.body.onload = function () {
 	function rippleEffect() {
 		const body = document.body;
 		const fillRatio = 0.5;
@@ -39,6 +39,7 @@ window.addEventListener("load", function () {
 			}
 		}, 500);
 	}
+
 	function bodyShake() {
 		document.body.classList.add("shake");
 		setInterval(() => {
@@ -56,6 +57,64 @@ window.addEventListener("load", function () {
 		});
 	}
 
+	function socketOpen() {
+		let socket = new WebSocket('ws://localhost:4000/');
+		socket.onopen = function() {
+			console.log('Socket open.');
+			socket.send(JSON.stringify({message: 'What is the meaning of life, the universe and everything?'}));
+			console.log('Message sent.')
+		};
+		socket.onmessage = function(message) {
+
+			console.log('Socket server message', message);
+			let data = JSON.parse(message.data);
+		};
+	}
+
 	rippleEffect();
 	bodyShake();
-});
+
+};
+
+// document.body.onload = function() {
+		
+// 	'use strict';
+
+// function socketExample() {
+// 	console.log('Creating socket');
+// 	let socket = new WebSocket('ws://localhost:4000/');
+// 	socket.onopen = function() {
+
+// 		console.log('Socket open.');
+// 		socket.send(JSON.stringify({message: 'What is the meaning of life, the universe and everything?'}));
+// 		console.log('Message sent.')
+// 	};
+// 	socket.onmessage = function(message) {
+
+// 		console.log('Socket server message', message);
+// 		let data = JSON.parse(message.data);
+// 	};
+// }
+
+// // Now the simple POST demo
+// function postExample() {
+
+// 	console.log('Creating regular POST message');
+
+// 	fetch(`http://localhost:4000/post/get10`,{
+// 		method:'GET'
+// 	})
+// 		.then(res=>{
+// 			return res.json()
+// 		})
+// 		.then(data=>{
+// 			console.log(data)
+// 		})
+// 		.catch((err) => console.log(err)); 
+// }
+
+// // Call them both;
+
+// socketExample();
+// postExample();
+// }
