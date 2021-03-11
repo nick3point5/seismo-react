@@ -41,19 +41,30 @@
 .profile-nav {
 	justify-content: space-between;
 	width: 100%;
-	animation: slide-in 2.5s;
 	transition: 0.5s;
 }
 
 @keyframes slide-in {
 	0% {
+		background-color: var(--color6);
+		z-index: 0;
+		height: 5rem;
+		margin: 0 1rem;
 		opacity: 0;
 	}
 	80% {
+		background-color: var(--color6);
+		z-index: 0;
+		height: 5rem;
+		margin: 0 1rem;
 		opacity: 0;
 		transform: translateY(-5rem);
 	}
 	100% {
+		background-color: var(--color6);
+		z-index: 0;
+		height: 5rem;
+		margin: 0 1rem;
 		opacity: 1;
 	}
 }
@@ -67,6 +78,8 @@
 	z-index: 0;
 	height: 5rem;
 	margin: 0 1rem;
+	animation: slide-in 2.5s;
+	transition: 1s;
 }
 
 .profile-nav-item-btn {
